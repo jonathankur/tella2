@@ -92,8 +92,8 @@
     <plugin name="cordova-plugin-http" spec="^1.2.0" />
         <engine name="android" spec="~6.2.3" />
     <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
-   <plugin name="cordova-android-support-gradle-release" spec="^1.1.1">
-        <variable name="ANDROID_SUPPORT_VERSION" value="25.+" />
+   <plugin name="cordova-android-support-gradle-release" source="npm">
+        <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Find deals near you" />
