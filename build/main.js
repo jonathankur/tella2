@@ -1314,7 +1314,7 @@ var CheckoutPage = (function () {
             content: "Please wait..."
         });
         loader.present();
-        var url = 'saveorder.php?user=' + window.localStorage.getItem('userTag') + '^' + this.address + '^' + this.payment + '&cart=' + window.localStorage.getItem('cart');
+        var url = 'saveorder.php?user=' + window.localStorage.getItem('userTag') + '^' + this.address + '^' + this.payment + '&vcode=' + this.vcode + '&discount=' + this.discount + '&cart=' + window.localStorage.getItem('cart');
         //  this.myAlert(url);
         this.connect.getList(url).subscribe(function (data) {
             loader.dismiss();
@@ -1332,6 +1332,8 @@ var CheckoutPage = (function () {
     };
     CheckoutPage.prototype.orderComplete = function () {
         var that = this;
+        window.localStorage.removeItem('vcode');
+        that.vcode = '';
         var alert = this.alertCtrl.create({
             title: 'Thank you',
             subTitle: 'Your order has been completed successfully',
