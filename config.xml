@@ -89,7 +89,6 @@
     </plugin>
     <engine name="ios" spec="~4.4.0" />
     <plugin name="cordova-plugin-http" spec="^1.2.0" />
-        <engine name="android" spec="~6.2.3" />
     <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
    <plugin name="cordova-android-support-gradle-release" source="npm">
         <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
