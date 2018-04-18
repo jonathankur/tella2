@@ -77,6 +77,10 @@
 	<splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
 
     </platform>
+
+<preference name="android-minSdkVersion" value="26"/>
+  <preference name="android-targetSdkVersion" value="26"/>
+  <preference name="android-maxSdkVersion" value="26"/>
      <plugin name="cordova-plugin-file" source="npm" />
 
 
