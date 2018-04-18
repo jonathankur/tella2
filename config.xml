@@ -88,7 +88,6 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="We use the Camera to Scan Barcodes" />
     </plugin>
     <engine name="ios" spec="~4.4.0" />
-    <plugin name="cordova-plugin-http" source="npm" />
     <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
    <plugin name="cordova-android-support-gradle-release" source="npm">
         <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
