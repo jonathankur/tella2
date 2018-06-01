@@ -798,6 +798,7 @@ var AddressPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__enter_credit_card_enter_credit_card__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tandc_tandc__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_connect__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_barcode_scanner__ = __webpack_require__(215);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -816,8 +817,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CheckoutPage = (function () {
-    function CheckoutPage(navCtrl, cdr, fb, alertCtrl, navParams, loadingCtrl, connect, zone) {
+    function CheckoutPage(navCtrl, cdr, fb, alertCtrl, navParams, loadingCtrl, connect, zone, barcodeScanner) {
         this.navCtrl = navCtrl;
         this.cdr = cdr;
         this.fb = fb;
@@ -826,6 +828,7 @@ var CheckoutPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.connect = connect;
         this.zone = zone;
+        this.barcodeScanner = barcodeScanner;
         this.user = '';
         this.address = '';
         this.username = '';
@@ -850,6 +853,55 @@ var CheckoutPage = (function () {
     }
     CheckoutPage.prototype.ionViewDidEnter = function () {
         this.recalc();
+    };
+    CheckoutPage.prototype.scanCustomer = function () {
+        var _this = this;
+        this.barcodeScanner.scan().then(function (barcodeData) {
+            if (!barcodeData.cancelled) {
+                _this.customerNumber(barcodeData.text);
+            }
+        }, function (err) {
+        });
+    };
+    CheckoutPage.prototype.customerNumber = function (s) {
+        var _this = this;
+        var that = this;
+        var loader = this.loadingCtrl.create({
+            content: "Searching..."
+        });
+        loader.present();
+        var url = 'getcustomer.php?code=' + s;
+        // console.log(url);
+        this.connect.getList(url).subscribe(function (data) {
+            loader.dismiss();
+            that.mytext = '';
+            that.zone.run(function () {
+                if (data.success) {
+                    window.localStorage.setItem('userTag', data.user);
+                    that.recalc();
+                }
+                else
+                    that.noCustomer();
+            });
+        }, function (err) {
+            loader.dismiss();
+            _this.connect.logError(err);
+        });
+    };
+    CheckoutPage.prototype.noCustomer = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Tella Message',
+            subTitle: 'The barcode that you scanned is not valid as a Customer Number.',
+            buttons: [
+                {
+                    text: 'OK',
+                    role: 'cancel',
+                    handler: function () {
+                    }
+                }
+            ]
+        });
+        alert.present();
     };
     CheckoutPage.prototype.noAddress = function () {
         var _this = this;
@@ -1036,11 +1088,12 @@ var CheckoutPage = (function () {
     };
     CheckoutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-checkout',template:/*ion-inline-start:"/var/www/html/ionic/tella2/src/pages/checkout/checkout.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Check-Out</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<div *ngIf="!user.length">\n <ion-item padding no-lines text-wrap>\n  <p>Having an account allows you to view & track your orders as well as saving your details for fast checkouts in future</p>\n  <ion-grid>\n		<ion-row text-center>\n			<ion-col padding-top>\n				<button ion-button full icon-left class="facebook-btn" (click)="loginUserWithFacebook()"><ion-icon name="logo-facebook"></ion-icon>&nbsp;&nbsp;Connect with Facebook</button>\n			</ion-col>\n		</ion-row>\n		<ion-row text-center>\n			<ion-col padding-top>\n				<button ion-button full icon-left  (click)="openSignUpPage()"><ion-icon name="ios-mail"></ion-icon>&nbsp;&nbsp;Enter via email</button>\n			</ion-col>\n	          </ion-row>\n		<ion-row>\n			<ion-col padding class="error" *ngIf="error">\n				 <p>{{error}}</p>\n			 </ion-col>\n		 </ion-row>\n		<ion-row padding-top>\n			<ion-col>\n				<p class="fontSize10">By signing up, you agree to Tella\'s<br><a (click)="openTermsAndConditions()">Terms and Conditions</a></p>\n			</ion-col>\n		</ion-row>\n  </ion-grid>\n </ion-item>\n</div>\n<div *ngIf="user.length">\n <div>Checkout as :-</div>\n <p class="userdetails" [innerHTML]="username"> </p>\n <ion-item text-right no-lines>\n  <button ion-button small outline (click)="doLogout()">Change</button>\n </ion-item> \n <div *ngIf="address.length" style="border-top:1px solid gainsboro">\n  <div>Shipping Address :-</div>\n  <p class="userdetails" [innerHTML]="shipping"> </p>\n  <ion-item text-right no-lines>\n   <button ion-button small outline (click)="showAddress(\'\')">Change</button>\n  </ion-item> \n\n  <div *ngIf="payment.length"  style="border-top:1px solid gainsboro">\n   <div>Payment Method :-</div>\n   <p class="userdetails" [innerHTML]="paycard"> </p>\n   <ion-item text-right no-lines>\n    <button ion-button small outline (click)="showPayment(\'\')">Change</button>\n   </ion-item> \n  </div>\n  <div *ngIf="!payment.length"  style="border-top:1px solid gainsboro"> \n   <div>Choose Payment Method :-</div>\n    <ion-list class="noBottomMargin">\n     <ion-item class="height80 borderBottom" no-lines  *ngFor="let m of pmethods">\n       <div (click)="showPayment(m.id);">\n       <ion-row>\n       <ion-col col-1>\n       </ion-col>\n       <ion-col col-11>\n       <div>\n	{{ m.typ }} ending in **** {{ m.last4 }}\n       </div>\n       </ion-col>\n       </ion-row>\n       </div>\n     </ion-item>\n    </ion-list>\n\n    <button ion-item (click)="showEnterPayment()" class="height80 borderBottom" no-lines>\n		Add Payment Method\n    </button>\n   </div>\n </div> \n <div *ngIf="!address.length"  style="border-top:1px solid gainsboro"> \n <div>Choose Shipping Address :-</div>\n\n	<ion-list class="noBottomMargin">\n			<ion-item class="height80 borderBottom" no-lines  *ngFor="let m of methods">\n                         <div (click)="showAddress(m.id);">\n                           <ion-row>\n                            <ion-col col-1>\n                            </ion-col>\n                            <ion-col col-11>\n				<div>{{ m.addr }}</div><div>{{m.suburb}} {{m.state}} {{m.postcode}}</div>\n                                <div>{{ m.country }}</div>\n                            </ion-col>\n                          </ion-row>\n                        </div>\n		</ion-item>\n	</ion-list>\n	\n  <button ion-item (click)="showEnterAddress()" class="height80 borderBottom" no-lines>\n		Add New Address\n  </button>\n <button ion-item (click)="noAddress()" class="height80 borderBottom" no-lines>\n		Address Not Applicable\n  </button>\n\n </div>\n</div> \n</ion-content>\n<ion-footer *ngIf="allok">\n<button ion-button full (click)="doConfirm()" color="secondary" style="font-weight:bold!important">CONFIRM</button>\n</ion-footer>'/*ion-inline-end:"/var/www/html/ionic/tella2/src/pages/checkout/checkout.html"*/,
+            selector: 'page-checkout',template:/*ion-inline-start:"/var/www/html/ionic/tella2/src/pages/checkout/checkout.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Check-Out</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<div *ngIf="!user.length">\n <ion-item *ngIf="!customerEntry" padding no-lines text-wrap>\n  <p>Having an account allows you to view & track your orders as well as saving your details for fast checkouts in future</p>\n  <ion-grid>\n		<ion-row text-center>\n			<ion-col padding-top>\n				<button ion-button full icon-left class="facebook-btn" (click)="loginUserWithFacebook()"><ion-icon name="logo-facebook"></ion-icon>&nbsp;&nbsp;Connect with Facebook</button>\n			</ion-col>\n		</ion-row>\n		<ion-row text-center>\n			<ion-col padding-top>\n				<button ion-button full icon-left  (click)="openSignUpPage()"><ion-icon name="ios-mail"></ion-icon>&nbsp;&nbsp;Enter via email</button>\n			</ion-col>\n	          </ion-row>\n\n		<ion-row text-center>\n			<ion-col padding-top>\n				<button ion-button full icon-left  (click)="scanCustomer()"><ion-icon name="ios-barcode"></ion-icon>&nbsp;&nbsp;Scan customer number</button>\n			</ion-col>\n	          </ion-row>\n\n		<ion-row>\n			<ion-col padding class="error" *ngIf="error">\n				 <p>{{error}}</p>\n			 </ion-col>\n		 </ion-row>\n		<ion-row padding-top>\n			<ion-col>\n				<p class="fontSize10">By signing up, you agree to Tella\'s<br><a (click)="openTermsAndConditions()">Terms and Conditions</a></p>\n			</ion-col>\n		</ion-row>\n  </ion-grid>\n </ion-item>\n</div>\n<div *ngIf="user.length">\n <div>Checkout as :-</div>\n <p class="userdetails" [innerHTML]="username"> </p>\n <ion-item text-right no-lines>\n  <button ion-button small outline (click)="doLogout()">Change</button>\n </ion-item> \n <div *ngIf="address.length" style="border-top:1px solid gainsboro">\n  <div>Shipping Address :-</div>\n  <p class="userdetails" [innerHTML]="shipping"> </p>\n  <ion-item text-right no-lines>\n   <button ion-button small outline (click)="showAddress(\'\')">Change</button>\n  </ion-item> \n\n  <div *ngIf="payment.length"  style="border-top:1px solid gainsboro">\n   <div>Payment Method :-</div>\n   <p class="userdetails" [innerHTML]="paycard"> </p>\n   <ion-item text-right no-lines>\n    <button ion-button small outline (click)="showPayment(\'\')">Change</button>\n   </ion-item> \n  </div>\n  <div *ngIf="!payment.length"  style="border-top:1px solid gainsboro"> \n   <div>Choose Payment Method :-</div>\n    <ion-list class="noBottomMargin">\n     <ion-item class="height80 borderBottom" no-lines  *ngFor="let m of pmethods">\n       <div (click)="showPayment(m.id);">\n       <ion-row>\n       <ion-col col-1>\n       </ion-col>\n       <ion-col col-11>\n       <div>\n	{{ m.typ }} ending in **** {{ m.last4 }}\n       </div>\n       </ion-col>\n       </ion-row>\n       </div>\n     </ion-item>\n    </ion-list>\n\n    <button ion-item (click)="showEnterPayment()" class="height80 borderBottom" no-lines>\n		Add Payment Method\n    </button>\n   </div>\n </div> \n <div *ngIf="!address.length"  style="border-top:1px solid gainsboro"> \n <div>Choose Shipping Address :-</div>\n\n	<ion-list class="noBottomMargin">\n			<ion-item class="height80 borderBottom" no-lines  *ngFor="let m of methods">\n                         <div (click)="showAddress(m.id);">\n                           <ion-row>\n                            <ion-col col-1>\n                            </ion-col>\n                            <ion-col col-11>\n				<div>{{ m.addr }}</div><div>{{m.suburb}} {{m.state}} {{m.postcode}}</div>\n                                <div>{{ m.country }}</div>\n                            </ion-col>\n                          </ion-row>\n                        </div>\n		</ion-item>\n	</ion-list>\n	\n  <button ion-item (click)="showEnterAddress()" class="height80 borderBottom" no-lines>\n		Add New Address\n  </button>\n <button ion-item (click)="noAddress()" class="height80 borderBottom" no-lines>\n		Address Not Applicable\n  </button>\n\n </div>\n</div> \n</ion-content>\n<ion-footer *ngIf="allok">\n<button ion-button full (click)="doConfirm()" color="secondary" style="font-weight:bold!important">CONFIRM</button>\n</ion-footer>'/*ion-inline-end:"/var/www/html/ionic/tella2/src/pages/checkout/checkout.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_8__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectorRef */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__["a" /* Facebook */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__providers_connect__["a" /* Connect */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_connect__["a" /* Connect */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_9__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _j || Object])
     ], CheckoutPage);
     return CheckoutPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=checkout.js.map
