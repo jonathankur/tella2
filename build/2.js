@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 301:
+/***/ 306:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TandcPageModule", function() { return TandcPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Vendor2PageModule", function() { return Vendor2PageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tandc__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vendor2__ = __webpack_require__(116);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var TandcPageModule = (function () {
-    function TandcPageModule() {
+var Vendor2PageModule = (function () {
+    function Vendor2PageModule() {
     }
-    return TandcPageModule;
+    return Vendor2PageModule;
 }());
-TandcPageModule = __decorate([
+Vendor2PageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__tandc__["a" /* TandcPage */],
+            __WEBPACK_IMPORTED_MODULE_2__vendor2__["a" /* Vendor2Page */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tandc__["a" /* TandcPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__vendor2__["a" /* Vendor2Page */]),
         ],
     })
-], TandcPageModule);
+], Vendor2PageModule);
 
-//# sourceMappingURL=tandc.module.js.map
+//# sourceMappingURL=vendor2.module.js.map
 
 /***/ })
 
