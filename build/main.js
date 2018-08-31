@@ -127,7 +127,7 @@ var MainPage = (function () {
         var _this = this;
         this.oneSignal.startInit('ddb89a00-f822-4748-b8e0-6f0b9027d890', '703322744261');
         //   this.oneSignal.startInit('1f930ed9-2f9e-4130-9a73-99c8fd726467', '703322744261'); 
-        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
         this.oneSignal.endInit();
         var i = this.oneSignal.getIds();
         i.then(function (data) {
