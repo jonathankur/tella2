@@ -115,7 +115,6 @@ var MainPage = (function () {
         if (w.length) {
             var url = 'pushstatus.php?account=' + w;
             this.connect.getList(url).subscribe(function (data) {
-                alert(JSON.stringify(data));
                 if (data.status == 'a')
                     that.askpush();
                 if (data.status == 'i')
@@ -128,7 +127,8 @@ var MainPage = (function () {
         this.oneSignal.startInit('66f471f3-4a43-4d95-9cd2-5975b8862dc5', '703322744261');
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
         this.oneSignal.endInit();
-        alert(this.oneSignal.getIds());
+        var i = this.oneSignal.getIds();
+        i.then(function (data) { return alert(JSON.stringify(data)); });
     };
     MainPage.prototype.askpush = function () {
         var _this = this;
