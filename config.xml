@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="au.com.tellainhouse" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="au.com.tellainhouse" version="1.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Tella</name>
     <description>Instant Payments</description>
     <author email="jonathankur@mail.com" href="http://theparcelpeople.com.au/">Tella</author>
@@ -47,6 +47,11 @@
 	<splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
 	<splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
 	<splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
+<config-file parent="/resources" target="./res/values/strings.xml">
+    <string name="fb_app_id">1455239151263568</string>
+    <string name="fb_app_name">Tella</string>
+</config-file>
+
     </platform>
     <platform name="ios">
 	<icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
@@ -93,7 +98,7 @@
     <engine name="ios" spec="~4.4.0" />
     <plugin name="cordova-plugin-http" spec="^1.2.0" />
         <engine name="android" spec="~6.2.3" />
-    <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
+    <plugin name="cordova-plugin-stripe" source="npm" />
    <plugin name="cordova-android-support-gradle-release" source="npm">
         <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
     </plugin>
