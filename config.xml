@@ -31,6 +31,8 @@
   <platform name="android">
           <allow-navigation href="*" />
         <allow-intent href="*" />
+    <plugin name="cordova-plugin-file" spec="^4.3.3" />
+
 	<icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
 	<icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
 	<icon density="hdpi" src="res/icons/android/drawable-hdpi-icon.png" />
@@ -108,7 +110,6 @@
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Find deals near you" />
     </plugin>
-     <plugin name="cordova-plugin-file" spec="^4.3.3" />
-
+ 
 
 </widget>
