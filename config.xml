@@ -108,6 +108,7 @@
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Find deals near you" />
     </plugin>
- 
+     <plugin name="cordova-plugin-file" spec="^4.3.3" />
+
 
 </widget>
