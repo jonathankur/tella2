@@ -102,7 +102,7 @@
     <string>We only use the camera to scan barcodes</string>
 </edit-config>
 <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
-    <string>We only use the camera to scan barcodes</string>
+    <string>We  only use the camera to scan barcodes</string>
 </edit-config>
 
 </widget>
