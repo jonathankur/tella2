@@ -1966,7 +1966,7 @@ var HistoryPage = (function () {
     };
     HistoryPage.prototype.showTrack = function (url) {
         if (url.length) {
-            var browser = this.iab.create(url, '_blank', 'location=no');
+            var browser = this.iab.create(url, '_blank', 'location=yes');
         }
     };
     HistoryPage.prototype.gotoTrans = function (h) {
