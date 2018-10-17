@@ -101,7 +101,7 @@
    <plugin name="cordova-plugin-stripe" source="npm">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="We only use the camera to scan barcodes" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="We only use the camera to scan barcodes" />
-   </plugin/>
+   </plugin>
     <engine name="ios" spec="4.5.4" />
 <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
     <string>We only use the camera to scan barcodes</string>
