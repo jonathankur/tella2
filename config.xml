@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="au.com.newtella2" version="1.4.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="au.com.newtella2" version="1.4.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tella</name>
     <description>Instant Payments</description>
     <author email="tella@theparcelpeople.com.au" href="http://tella.com.au/">Tella</author>
@@ -72,7 +72,12 @@
 	<splash height="1024" platform="ios" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
 	<splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
 	<splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
-
+<config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+        <string>We only use the camera to scan barcodes</string>
+</config-file>
+<config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+        <string>We only use the camera to scan barcodes</string>
+</config-file>
     </platform>
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="1.3.1" />
@@ -95,13 +100,6 @@
     <plugin name="cordova-plugin-file" source="npm" />
    <plugin name="cordova-plugin-stripe" source="npm" />
     <engine name="ios" spec="4.5.4" />
-<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="overwrite">
-    <string>We only use the camera to scan barcodes</string>
-</edit-config>
-<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="overwrite">
-    <string>We only use the camera to scan barcodes</string>
-</edit-config>
-
 </widget>
 
 
