@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="au.com.newtella2" version="1.4.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="au.com.newtella2" version="1.4.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tella</name>
     <description>Instant Payments</description>
     <author email="tella@theparcelpeople.com.au" href="http://tella.com.au/">Tella</author>
@@ -95,10 +95,10 @@
     <plugin name="cordova-plugin-file" source="npm" />
    <plugin name="cordova-plugin-stripe" source="npm" />
     <engine name="ios" spec="4.5.4" />
-<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="overwrite">
     <string>We only use the camera to scan barcodes</string>
 </edit-config>
-<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+<edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="overwrite">
     <string>We only use the camera to scan barcodes</string>
 </edit-config>
 
