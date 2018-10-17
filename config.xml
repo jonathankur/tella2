@@ -86,6 +86,7 @@
     </plugin>
     <plugin name="phonegap-plugin-barcodescanner" source="npm" >
         <variable name="CAMERA_USAGE_DESCRIPTION" value="We only use the camera to scan barcodes" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="We only use the camera to scan barcodes" />
     </plugin>
 
     <plugin name="cordova-plugin-compat" spec="^1.1.0" />
@@ -98,7 +99,7 @@
     <string>We only use the camera to scan barcodes</string>
 </edit-config>
 <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
-    <string>We  only use the camera to scan barcodes</string>
+    <string>We only use the camera to scan barcodes</string>
 </edit-config>
 
 </widget>
