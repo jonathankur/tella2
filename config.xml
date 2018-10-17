@@ -92,6 +92,7 @@
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="onesignal-cordova-plugin" source="npm" />
     <plugin name="cordova-plugin-file" source="npm" />
+   <plugin name="cordova-plugin-stripe" source="npm" />
     <engine name="ios" spec="4.5.4" />
 <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
     <string>We only use the camera to scan barcodes</string>
