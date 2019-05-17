@@ -99,7 +99,7 @@
 
     <plugin name="cordova-plugin-compat" spec="^1.1.0" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
-    <plugin name="onesignal-cordova-plugin" source="npm" />
+    <plugin name="onesignal-cordova-plugin"  spec="2.4.5" source="npm" />
     <plugin name="cordova-plugin-file" source="npm" />
    <plugin name="cordova-plugin-stripe" source="npm">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="We only use the camera to scan barcodes" />
