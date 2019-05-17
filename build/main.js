@@ -96,11 +96,11 @@ var MainPage = (function () {
             var i = c.split('~');
             for (var e = 0; e < i.length; e++) {
                 var f = i[e].split('^');
-                var ths = { id: f[0], qty: f[1], pic: 'http://theparcelpeople.com.au/catalogue/pics/' + f[0] + '.jpg', title: f[3], price: f[2], company: f[4], personal: f[5], persdets: f[6] };
+                var ths = { id: f[0], qty: f[1], pic: 'http://tella.com.au/pics/' + f[0] + '.jpg', title: f[3], price: f[2], company: f[4], personal: f[5], persdets: f[6] };
                 this.orderitems.push(ths);
                 this.total += parseFloat(f[1]) * parseFloat(f[2]);
                 this.itemcount += parseInt(f[1]);
-                this.myPic = 'http://theparcelpeople.com.au/catalogue/banners/' + f[4] + '.jpg?v=3';
+                this.myPic = 'http://tella.com.au/banners/' + f[4] + '.jpg?v=3';
             }
             this.orderTotal = this.total + this.freightAmount;
         }
@@ -581,7 +581,7 @@ var MultiplePage = (function () {
         this.bannerImg = './assets/img/blankbanner.jpg';
         this.items = this.navParams.get('items');
         for (var ss in this.items)
-            this.bannerImg = 'http://theparcelpeople.com.au/catalogue/banners/' + this.items[ss].company + '.jpg';
+            this.bannerImg = 'http://tella.com.au/banners/' + this.items[ss].company + '.jpg';
     }
     MultiplePage.prototype.ionViewDidEnter = function () {
         this.recalc();
@@ -1285,7 +1285,7 @@ var Vendor2Page = (function () {
         var _this = this;
         var that = this;
         var c = window.localStorage.getItem('cart').split('^');
-        this.myPic = 'http://theparcelpeople.com.au/catalogue/banners/' + c[4] + '.jpg?v=3';
+        this.myPic = 'http://tella.com.au/banners/' + c[4] + '.jpg?v=3';
         var url = 'getvendor.php?page=' + this.page + '&cart=' + window.localStorage.getItem('cart');
         this.connect.getList(url).subscribe(function (data) {
             that.zone.run(function () {
@@ -1339,7 +1339,7 @@ var VendortermsPage = (function () {
     }
     VendortermsPage.prototype.ionViewDidLoad = function () {
         var c = window.localStorage.getItem('cart').split('^');
-        this.myPic = 'http://theparcelpeople.com.au/catalogue/banners/' + c[4] + '.jpg?v=3';
+        this.myPic = 'http://tella.com.au/banners/' + c[4] + '.jpg?v=3';
         var h = ['Postage Policy', 'Returns Policy', 'General Terms & Conditions', 'Privacy Policy'];
         var cnt = 0;
         for (var i in h) {
@@ -1479,7 +1479,7 @@ var CheckoutPage = (function () {
                     that_1.payment = data.payment;
                     that_1.discount = data.discount;
                     that_1.voucher = data.voucher;
-                    that_1.bannerPic = 'http://theparcelpeople.com.au/catalogue/banners/' + data.company + '.jpg?v=2';
+                    that_1.bannerPic = 'http://tella.com.au/banners/' + data.company + '.jpg?v=2';
                     window.localStorage.setItem('userAddress', that_1.address);
                     window.localStorage.setItem('userPayment', that_1.payment);
                     window.localStorage.setItem('userPostcode', data.postcode);
@@ -2084,7 +2084,7 @@ var HistitemsPage = (function () {
             that.zone.run(function () {
                 that.items = data.items;
                 for (var ss in _this.items)
-                    _this.bannerImg = 'http://theparcelpeople.com.au/catalogue/banners/' + _this.items[ss].company + '.jpg';
+                    _this.bannerImg = 'http://tella.com.au/banners/' + _this.items[ss].company + '.jpg';
                 that.cdr.markForCheck();
             });
         }, function (err) {
@@ -2913,7 +2913,7 @@ var OneitemPage = (function () {
         this.title = this.item.title;
         this.myPic = this.item.pic;
         this.personal = '';
-        this.bannerPic = 'http://theparcelpeople.com.au/catalogue/banners/' + this.item.company + '.jpg?v=2';
+        this.bannerPic = 'http://tella.com.au/banners/' + this.item.company + '.jpg?v=2';
         this.qty = this.item.qty;
         this.price = this.item.price;
     }
@@ -3417,8 +3417,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Connect = (function () {
     function Connect(http) {
         this.http = http;
-        this.server_url = 'http://theparcelpeople.com.au/catalogue/server/';
-        this.server2 = 'http://theparcelpeople.com.au/catalogue/server/';
+        this.server_url = 'http://tella.com.au/server/';
+        this.server2 = 'http://tella.com.au/server/';
     }
     Connect.prototype.PostQuery = function (object, parameter) {
         return this.http.get(this.server_url + object + parameter).map(function (res) { return res.json(); });
